@@ -1,4 +1,5 @@
 include("convenience_functions.jl")
+include("factors.jl")
 
 using Graphs
 
