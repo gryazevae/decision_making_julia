@@ -1,10 +1,4 @@
-Base.Dict{Symbol,V}(a::NamedTuple) where V =
-        Dict{Symbol,V}(n=>v for (n,v) in zip(keys(a), values(a)))
-Base.convert(::Type{Dict{Symbol,V}}, a::NamedTuple) where V =
-                                                        Dict{Symbol,V}(a)
-Base.isequal(a::Dict{Symbol,<:Any}, nt::NamedTuple) =
-                                                length(a) == length(nt) &&
-                                                all(a[n] == v for (n,v) in zip(keys(nt), values(nt)))
+include("convenience_functions.jl")
 
 struct Variable
     name::Symbol
@@ -37,7 +31,10 @@ function normalize!(ϕ::Factor)
     return ϕ
 end
 
-# requires convenience functions from appendix G.5
+
+# Example from book. Сommented out so as not to be executed 
+# when the file is included by include
+"""
 X = Variable(:x, 2)
 Y = Variable(:y, 2)
 Z = Variable(:z, 2)
@@ -47,3 +44,4 @@ Z = Variable(:z, 2)
                                 (x=2, y=1, z=1) => 0.01, (x=2, y=1, z=2) => 0.05,
                                 (x=2, y=2, z=1) => 0.02, (x=2, y=2, z=2) => 0.07,
                                 ))
+"""
